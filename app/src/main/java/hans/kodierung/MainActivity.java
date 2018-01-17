@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnGo;
     TextView tvMorse;
     TextView tvEntropy;
+    HashMap<Character,String> mapMorse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,30 @@ public class MainActivity extends AppCompatActivity {
                 tvEntropy.setText( String.valueOf( entropy(text) ) );
             }
         });
+        tvMorse.setTextSize(32);
+        mapMorse = new HashMap<>();
+        mapMorse.put(' ', "   ");
+        mapMorse.put('0', "-----");
+        mapMorse.put('1', ".----");
+        //...
+        putCapital('A', ".-  ");
+        putCapital('B', "-...  ");
+        putCapital('C', "-.-.  ");
+        putCapital('D', "-..  ");
+        //TODO: Continue this.
+    }
+
+    public void putCapital(char latinCapital, String morse) {
+        /**
+         * Add a letter to the morse alphabet.
+         * Both the given capital and the corresponding "Kleinbuchstabe" are added to mapMorse
+         *  using the ascii property:
+         *  (lowercase) = (capital) + 32
+         */
+        morse = morse.replace('.', '\u2219'); // Use a middle point
+        mapMorse.put(latinCapital, morse);
+        char lowercase = (char)(32 + (int) latinCapital);
+        mapMorse.put(lowercase, morse);
     }
 
     public float entropy(String s) {
@@ -76,7 +101,17 @@ public class MainActivity extends AppCompatActivity {
          * @param: s input text String
          * @return A String representing the morse code in a human-readable way: '_' long, '.' short, ' ' sign separator, '   ' word separator
          */
-        //TODO: Implement this. Mind the case text.length()==0
-        return ".... ._ ._.. ._.. ___   .__ . ._.. _";
+        if( s.length() == 0 ) // Mind the case text.length()==0
+            return "";
+        StringBuffer morseBuffer = new StringBuffer();
+        char character;
+        String mCharacter; // One character in morse code
+        for( int i = 0; i < s.length(); i++ ) { // Iterate through input text
+            character = s.charAt(i); // get current character
+            mCharacter = mapMorse.get(character); // Look up Morse
+            if( mCharacter != null )
+                morseBuffer.append(mCharacter); // Write it to output StringBuffer
+        }
+        return morseBuffer.toString(); //".... ._ ._.. ._.. ___   .__ . ._.. _";
     }
 }
