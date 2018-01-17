@@ -7,6 +7,8 @@ import android.widget.EditText;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.HashMap;
+
 public class MainActivity extends AppCompatActivity {
 
     EditText etInput;
@@ -41,17 +43,38 @@ public class MainActivity extends AppCompatActivity {
         /**
          * Calculate the entropy of a text.
          * @param: s input text String
-         * @return: entropy = sum_i( p_i * log_2(p_i) ) where p_i = #n_i / sum_i( #n_i )
+         * @return: float entropy = - sum_i( p_i * log_2(p_i) ) where p_i = #n_i / sum_i( #n_i )
          */
-        //TODO: Implement this
-        return (float) 2.2;
+
+        // Map the characters: Citing the sheet...
+        HashMap<Character,Integer> map = new HashMap<Character,Integer>();
+        for(int i = 0; i < s.length(); i++){
+            char c = s.charAt(i);
+            Integer val = map.get(c);
+            if(val != null){
+                map.put(c, new Integer(val + 1));
+            }else{
+                map.put(c,1);
+            }
+        }
+
+        // Calculate entropy...
+        int N = s.length(); // Number of characters
+        float entropy = 0; // Prepare sum
+        for( char c : map.keySet() ) {
+            // S += - p_i * log_2(p_i)
+            float p_i = ( (float)map.get(c) ) / (float)N;
+            entropy -= p_i * Math.log(p_i) / Math.log(2);
+        }
+
+        return entropy;
     }
 
     public String morse(String s) {
         /**
          * Translate a text into the morse alphabet.
          * @param: s input text String
-         * @return A String representing the morse code in a human-readable way: '_' long, '.' short, ' ' sign seperator, '   ' word seperator
+         * @return A String representing the morse code in a human-readable way: '_' long, '.' short, ' ' sign separator, '   ' word separator
          */
         //TODO: Implement this. Mind the case text.length()==0
         return ".... ._ ._.. ._.. ___   .__ . ._.. _";
