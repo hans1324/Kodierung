@@ -43,12 +43,41 @@ public class MainActivity extends AppCompatActivity {
         mapMorse.put(' ', "   ");
         mapMorse.put('0', "-----");
         mapMorse.put('1', ".----");
-        //...
+        mapMorse.put('2', "..---");
+        mapMorse.put('3', "...--");
+        mapMorse.put('4', "....-");
+        mapMorse.put('5', ".....");
+        mapMorse.put('6', "-....");
+        mapMorse.put('7', "--...");
+        mapMorse.put('8', "---..");
+        mapMorse.put('9', "----.");
+
         putCapital('A', ".-  ");
         putCapital('B', "-...  ");
         putCapital('C', "-.-.  ");
         putCapital('D', "-..  ");
-        //TODO: Continue this.
+        putCapital('E', ".  ");
+        putCapital('F', "..-.  ");
+        putCapital('G', "--.  ");
+        putCapital('H', "....  ");
+        putCapital('I', "..  ");
+        putCapital('J', ".---  ");
+        putCapital('K', "-.-  ");
+        putCapital('L', ".-..  ");
+        putCapital('M', "--  ");
+        putCapital('N', "-.  ");
+        putCapital('O', "---  ");
+        putCapital('P', ".--.  ");
+        putCapital('Q', "--.-  ");
+        putCapital('R', ".-.  ");
+        putCapital('S', "...  ");
+        putCapital('T', "-  ");
+        putCapital('U', "..-  ");
+        putCapital('V', "...-  ");
+        putCapital('W', ".--  ");
+        putCapital('X', "-..-  ");
+        putCapital('Y', "-.--  ");
+        putCapital('Z', "--..  ");
     }
 
     public void putCapital(char latinCapital, String morse) {
